@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import adminRoutes from './routes/adminRoutes.js';
+import authRoutes from './routes/authRoutes.js'
 // import userAccessRoutes from './routes/userAccessRoutes.js';
 import './config/db.js'; // This will run the db.connect() on import
 
@@ -14,7 +15,6 @@ app.use(express.json());  // Body parser for JSON data
 
 // Routes
 app.use('/admin', adminRoutes);  // Admin routes
-// app.use('/api/access', userAccessRoutes);  // User access routes
 app.use('/auth', authRoutes);
 
 // Start the server
