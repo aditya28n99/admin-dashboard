@@ -13,10 +13,13 @@ export const signup = async (signupData) => {
 
 export const login = async (loginData) => {
   try {
-    const response = await axios.post(`${baseURL}/auth/login`, loginData);
+    const response = await axios.post(`${baseURL}/auth/login`, loginData);  // Ensure baseURL is correct
     return response.data;
   } catch (error) {
-    throw new Error(error.response.data.message || 'Error during login');
+    if (error.response && error.response.status === 404) {
+      throw new Error('Login endpoint not found (404). Check if the backend URL is correct.');
+    }
+    throw new Error(error.response?.data?.message || 'Error during login');
   }
 };
 
