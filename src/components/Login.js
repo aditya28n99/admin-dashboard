@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { login } from '../services'; // Ensure this is your login service
+import { login } from '../services'; // Login service using Axios
 import { useNavigate, Link } from 'react-router-dom';
-import AuthContext from '../context/AuthContext'; // Import AuthContext for login
-import { FaSpinner } from 'react-icons/fa'; // Optional spinner icon (install react-icons if necessary)
+import AuthContext from '../context/AuthContext'; // AuthContext for token handling
+import { FaSpinner } from 'react-icons/fa'; // Spinner for loading state
 
 const Login = () => {
-  const { login: loginContext } = useContext(AuthContext); // Use login function from context
+  const { login: loginContext } = useContext(AuthContext); // Extract login method from AuthContext
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -16,6 +16,7 @@ const Login = () => {
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
 
+  // Handle form field changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -24,6 +25,7 @@ const Login = () => {
     }));
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -31,18 +33,24 @@ const Login = () => {
     setSuccess('');
 
     try {
+      // Make login request with Axios
       const response = await login(formData);
       setSuccess('Logged in successfully!');
-      loginContext(response.token); // Save token via AuthContext
+      loginContext(response.token); // Store token in AuthContext
+      localStorage.setItem('token', response.token); // Optionally store token in localStorage
+
       setFormData({ email: '', password: '' }); // Clear form
 
+      // Redirect to dashboard after a short delay
       setTimeout(() => {
-        navigate('/'); // Redirect to dashboard after login
-      }, 1000); // Redirect after a short delay
+        navigate('/'); // Redirect to home or dashboard page
+      }, 1000);
+
     } catch (err) {
-      setError(err.message || 'Login failed');
+      setError(err.message || 'Login failed, please try again.'); // Display error message
+      setSuccess(''); // Clear success message if login fails
     } finally {
-      setLoading(false);
+      setLoading(false); // Stop loading state
     }
   };
 
@@ -95,18 +103,21 @@ const Login = () => {
           </div>
         </form>
 
+        {/* Error Message */}
         {error && (
           <div className="mt-4 text-red-600 text-sm">
             <p>{error}</p>
           </div>
         )}
 
+        {/* Success Message */}
         {success && (
           <div className="mt-4 text-green-600 text-sm">
             <p>{success}</p>
           </div>
         )}
 
+        {/* Sign up link */}
         <div className="mt-6 text-center">
           <p className="text-gray-600">
             Don't have an account?{' '}
