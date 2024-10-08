@@ -1,9 +1,9 @@
-import Dashboard from './components/Dashboard'
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Signup from './components/Signup';
-import Login from './components/Login';
+import Login from './pages/Login/LoginScreen';
 import { AuthProvider } from './context/AuthContext';
 import './App.css';
+import DashboardScreen from './pages/Dashboard/DashboardScreen';
+import MainScreen from './pages/Dashboard/MainScreen';
 
 function App() {
 
@@ -19,9 +19,8 @@ function App() {
     <AuthProvider> 
     <Router>
     <Routes>      
-      <Route path="/" element={<PrivateRoute element={<Dashboard />} />} />
+      <Route path="/" element={<PrivateRoute element={<DashboardScreen />} />} />
       <Route path="*" element={<Navigate to="/" />} />
-      <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
     </Routes>
   </Router>
