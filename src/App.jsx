@@ -3,7 +3,6 @@ import Login from './pages/Login/LoginScreen';
 import { AuthProvider } from './context/AuthContext';
 import './App.css';
 import DashboardScreen from './pages/Dashboard/DashboardScreen';
-import MainScreen from './pages/Dashboard/MainScreen';
 
 function App() {
 
