@@ -20,7 +20,7 @@ export default function Navbar({ onSidebarToggle }) {
     { name: 'Sign out', href: '#' },
   ]
 
-  const [adminData, setAdminData] = useState({username:"Tom Kook", email:"tomkook@mmc.com"});
+  const [adminData, setAdminData] = useState({username:"Tom cook", email:"tomcook@mmc.com"});
 
 
   useEffect(()=>{
