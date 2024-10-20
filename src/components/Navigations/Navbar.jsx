@@ -11,12 +11,30 @@ import {
 } from '@heroicons/react/24/outline'
 
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
+import { useEffect, useState } from 'react';
+import { fetchAdmin } from '../../services';
 
 export default function Navbar({ onSidebarToggle }) {
   const userNavigation = [
     { name: 'Your profile', href: '#' },
     { name: 'Sign out', href: '#' },
   ]
+
+  const [adminData, setAdminData] = useState({username:"Tom Kook", email:"tomkook@mmc.com"});
+
+
+  useEffect(()=>{
+    const loadAdminData = async () =>{
+      try{
+        const admin = await fetchAdmin();
+        setAdminData(admin);
+      }catch(error){
+        console.log("Navbar Admin details error: ", error)
+      }
+    };
+    loadAdminData();
+  },[]);
+
   return (
     <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
       <button
@@ -61,7 +79,11 @@ export default function Navbar({ onSidebarToggle }) {
               />
               <span className="hidden lg:flex lg:items-center">
                 <span aria-hidden="true" className="ml-4 text-sm/6 font-semibold text-gray-900">
-                  Tom Cook
+                <div className='text-left'>
+                  <h1 className='font-bold text-lg'>{adminData.username}</h1>
+                  <h2 className='text-sm text-gray-500'>{adminData.email}</h2>
+
+                </div>
                 </span>
                 <ChevronDownIcon aria-hidden="true" className="ml-2 size-5 text-gray-400" />
               </span>
