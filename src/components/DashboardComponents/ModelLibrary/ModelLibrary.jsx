@@ -1,11 +1,10 @@
 import React from "react";
-import ProfilePage from "../../../pages/ProfilePage";
 
 export default function ModelLibrary() {
 
     return (
         <div className="p-5 rounded-md bg-white">
-            <ProfilePage/>
+            <h1>Model Library</h1>
         </div>
     );
 }

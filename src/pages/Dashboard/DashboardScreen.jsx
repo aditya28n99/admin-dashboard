@@ -35,7 +35,7 @@ export default function DashboardScreen() {
 const [sidebarOpen, setSidebarOpen] = useState(false);
   
 return (
-  <div>
+  <div className='bg-slate-100 min-h-screen'>
     <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} setCurrentView={setCurrentView} currentView={currentView}/>
     <div className="lg:pl-72">
       <Navbar onSidebarToggle={() => setSidebarOpen(true)} />
