@@ -11,6 +11,7 @@ import { RxDashboard, RxLayers, RxActivityLog } from "react-icons/rx";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { FiSettings } from "react-icons/fi";
 import Button from '../Button/Button';
+import Logo from "../../../assets/images/logo.png"
 
 export default function Sidebar({ isOpen, onClose, setCurrentView, currentView }) {
   return (
@@ -38,7 +39,7 @@ export default function Sidebar({ isOpen, onClose, setCurrentView, currentView }
               <div className="flex h-16 shrink-0 items-center">
                 <img
                   alt="Make My Crew Logo"
-                  src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
+                  src={Logo}
                   className="h-8 w-auto"
                 />
               </div>
@@ -98,11 +99,11 @@ export default function Sidebar({ isOpen, onClose, setCurrentView, currentView }
       {/* Static Sidebar */}
       <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
         <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
-          <div className="flex h-16 shrink-0 items-center">
+          <div className="flex items-center border-b-4 border-double">
             <img
               alt="Your Company"
-              src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
-              className="h-8 w-auto"
+              src={Logo}
+              className="w-auto"
             />
           </div>
           {/* Add Sidebar navigation */}
