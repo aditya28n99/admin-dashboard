@@ -15,13 +15,8 @@ import { useEffect, useState } from 'react';
 import { fetchAdmin } from '../../services';
 
 export default function Navbar({ onSidebarToggle }) {
-  const userNavigation = [
-    { name: 'Your profile', href: '#' },
-    { name: 'Sign out', href: '#' },
-  ]
 
   const [adminData, setAdminData] = useState({username:"Tom cook", email:"tomcook@mmc.com"});
-
 
   useEffect(()=>{
     const loadAdminData = async () =>{
@@ -34,6 +29,17 @@ export default function Navbar({ onSidebarToggle }) {
     };
     loadAdminData();
   },[]);
+
+  const handleSignOut = () => {
+    // Clear token from local storage
+    localStorage.removeItem('token');
+    // Redirect to login page
+    window.location.href = '/login';
+  };
+
+  const userNavigation = [
+    { name: 'Sign out', href: '#', callback: handleSignOut },
+  ]
 
   return (
     <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
@@ -96,6 +102,7 @@ export default function Navbar({ onSidebarToggle }) {
                 <MenuItem key={item.name}>
                   <a
                     href={item.href}
+                    onClick={item.callback}
                     className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
                   >
                     {item.name}
